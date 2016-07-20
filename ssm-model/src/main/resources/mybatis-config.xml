@@ -4,15 +4,15 @@
     "-//mybatis.org//DTD Config 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<configuration> 
-	
- 	<settings> 
-        <setting name="cacheEnabled" value="true" /> 
-        <setting name="useGeneratedKeys" value="true" /> 
-        <setting name="defaultExecutorType" value="REUSE" /> 
-    </settings>
-    
-     <typeAliases>
-    </typeAliases>
+<configuration>
+
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="User" type="com.tasly.gxx.domain.User" />
+	</typeAliases>
 
 </configuration>

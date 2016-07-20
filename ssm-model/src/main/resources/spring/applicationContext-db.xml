@@ -72,19 +72,23 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />	
+	</bean>
 
 	<!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
 	<cache:annotation-driven cache-manager="cacheManager"
 		proxy-target-class="true" />
 
-	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+ 	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<property name="caches">
 			<set>
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean"
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
 					p:name="default" />
 				<bean
-					class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean"
+					class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
 					p:name="andCache" />
 			</set>
 		</property>
