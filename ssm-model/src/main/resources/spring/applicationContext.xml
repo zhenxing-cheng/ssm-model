@@ -28,7 +28,7 @@
 
 	<!-- Enable Package Scan-->
 	<!-- 保证mysql driver按顺序正常加载-->
-	<context:component-scan base-package="com.tasly.gxx.*"/>	
+<!-- 	<context:component-scan base-package="com.tasly.gxx.dao,com.tasly.gxx.service"/> -->	
 
 	<!-- Enable Annotation -->
 	<tx:annotation-driven/>
