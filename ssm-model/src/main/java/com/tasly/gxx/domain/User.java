@@ -1,5 +1,9 @@
 package com.tasly.gxx.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+
 public class User {
     private Integer id;
 
@@ -8,6 +12,8 @@ public class User {
     private String password;
 
     private Integer age;
+    
+    private Set<Role> roleSet = new HashSet<Role>();
 
     public Integer getId() {
         return id;
@@ -40,4 +46,13 @@ public class User {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+	public Set<Role> getRoleSet() {
+		return roleSet;
+	}
+
+	public void setRoleSet(Set<Role> roleSet) {
+		this.roleSet = roleSet;
+	}
+
 }

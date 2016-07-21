@@ -24,4 +24,20 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "showUser";
 	}
+	
+	@RequestMapping(value="/getUserInfo")  
+    public String getUserInfo(HttpServletRequest request){  
+        String currentUser = (String)request.getSession().getAttribute("currentUser");  
+        System.out.println("当前登录的用户为[" + currentUser + "]");  
+        request.setAttribute("currUser", currentUser);  
+        return "/user/userInfo";  
+    }
+	
+	@RequestMapping(value="/listUser")  
+    public String userList(HttpServletRequest request){  
+        String currentUser = (String)request.getSession().getAttribute("currentUser");  
+        System.out.println("当前登录的用户为[" + currentUser + "]");  
+        request.setAttribute("currUser", currentUser);  
+        return "/user/listUser";  
+    }
 }

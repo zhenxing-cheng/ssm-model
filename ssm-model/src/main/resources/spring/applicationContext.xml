@@ -41,4 +41,5 @@
 	</bean>
 
 	<import resource="applicationContext-db.xml"/>
+	<import resource="applicationContext-shiro.xml"/>
 </beans>
