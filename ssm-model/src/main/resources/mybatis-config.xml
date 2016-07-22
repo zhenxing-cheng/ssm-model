@@ -13,6 +13,9 @@
 	</settings>
 	<typeAliases>
 		<typeAlias alias="User" type="com.tasly.gxx.domain.User" />
+		<typeAlias alias="Role" type="com.tasly.gxx.domain.Role" />
+		<typeAlias alias="Permission" type="com.tasly.gxx.domain.Permission" />
+		<typeAlias alias="UserRoleRelation" type="com.tasly.gxx.domain.UserRoleRelationKey" />
 	</typeAliases>
 
 </configuration>

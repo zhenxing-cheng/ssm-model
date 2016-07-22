@@ -14,10 +14,17 @@ public class UserDaoImpl implements IUserDao {
 
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
-	
+
 	public User getEntityByUserId(Integer id) {
 		IUserMapper userMapper = sqlSession.getMapper(IUserMapper.class);
-		return userMapper.selectByPrimaryKey(id);
+		User user= userMapper.selectByPrimaryKey(id);
+		return user;
 	}
 
+	public User findUserByName(String name) {
+		IUserMapper userMapper = sqlSession.getMapper(IUserMapper.class);
+		User user= userMapper.findUserByUserName(name);
+		return user;
+	}
+	
 }

@@ -46,7 +46,7 @@
 				/security/login=anon
 				/security/getVerifyCodeImage=anon
 				/main**=authc
-				/user/info**=authc
+				/user/**=authc
 				/admin/listUser**=authc,perms[admin:manage]
 			</value>
 		</property>

@@ -8,4 +8,6 @@ import com.tasly.gxx.domain.User;
 public interface IUserDao {
     
 	public User getEntityByUserId(Integer id);
+	
+	public User findUserByName(String name);
 }

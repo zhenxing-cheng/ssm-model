@@ -2,11 +2,8 @@ package com.tasly.gxx.client;
 
 import com.tasly.gxx.domain.User;
 import com.tasly.gxx.domain.UserExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 public interface IUserMapper {
     int countByExample(UserExample example);
@@ -30,4 +27,6 @@ public interface IUserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    User findUserByUserName(String name);
 }

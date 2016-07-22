@@ -1,34 +1,30 @@
 package com.tasly.gxx.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
 
 public class User {
-    private Integer id;
+    private Integer userId;
 
-    private String userName;
+    private String username;
 
     private String password;
-
-    private Integer age;
     
-    private Set<Role> roleSet = new HashSet<Role>();
+    private List<Role> roleList;//一个用户多个角色
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUsername() {
+        return username;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -39,20 +35,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-	public Set<Role> getRoleSet() {
-		return roleSet;
+	public List<Role> getRoleList() {
+		return roleList;
 	}
 
-	public void setRoleSet(Set<Role> roleSet) {
-		this.roleSet = roleSet;
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
-
+      
 }

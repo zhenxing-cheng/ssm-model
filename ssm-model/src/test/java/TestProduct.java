@@ -29,7 +29,6 @@ public class TestProduct {
         Product product = new Product();  
         product.setSkuId(skuId);
         product.setSkuName(skuName);
-        product.setComment("≤‚ ‘");
         productDao.save(product);  
   
         // ---------------Read ---------------  
