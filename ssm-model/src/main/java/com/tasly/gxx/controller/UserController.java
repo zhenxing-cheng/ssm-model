@@ -3,6 +3,7 @@ package com.tasly.gxx.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +28,19 @@ public class UserController {
 	
 	@RequestMapping(value="/getUserInfo")  
     public String getUserInfo(HttpServletRequest request){  
-        String currentUser = (String)request.getSession().getAttribute("currentUser");  
-        System.out.println("当前登录的用户为[" + currentUser + "]");  
-        request.setAttribute("currUser", currentUser);  
+		User currentUser = (User) SecurityUtils.getSubject()
+				.getSession().getAttribute("currentUser");
+        System.out.println("当前登录的用户为[" + currentUser.toString() + "]");  
+        request.setAttribute("currUser", currentUser.getUsername());  
         return "/user/userInfo";  
     }
 	
 	@RequestMapping(value="/listUser")  
     public String userList(HttpServletRequest request){  
-        String currentUser = (String)request.getSession().getAttribute("currentUser");  
-        System.out.println("当前登录的用户为[" + currentUser + "]");  
-        request.setAttribute("currUser", currentUser);  
+		User currentUser = (User) SecurityUtils.getSubject()
+				.getSession().getAttribute("currentUser");  
+        System.out.println("当前登录的用户为[" + currentUser.toString() + "]");  
+        request.setAttribute("currUser", currentUser.getUsername());  
         return "/user/listUser";  
     }
 }
