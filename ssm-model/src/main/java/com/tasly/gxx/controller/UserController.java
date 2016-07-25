@@ -32,6 +32,7 @@ public class UserController {
 				.getSession().getAttribute("currentUser");
         System.out.println("当前登录的用户为[" + currentUser.toString() + "]");  
         request.setAttribute("currUser", currentUser.getUsername());  
+        request.setAttribute("selectItem", "user");
         return "/user/userInfo";  
     }
 	

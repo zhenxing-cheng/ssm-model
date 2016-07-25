@@ -39,7 +39,7 @@ function reloadVerifyCode(){
           <td width="127"><img src="<%=request.getContextPath()%>/mydemo/getVerifyCodeImage" width="98" height="27" id="verifyCodeImage" onclick="reloadVerifyCode()" /></td>
         </tr>
         <tr>
-          <td height="16" colspan="3"></td>
+          <td height="16" colspan="3"><div style="color:red; font-size:15px;">${message_login}</div></td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -49,8 +49,8 @@ function reloadVerifyCode(){
           <td>&nbsp;</td>
           <td colspan="2"><table width="224" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td height="24"><a href="#none" class="mm">忘记登录密码？</a></td>
-              <td align="right"><a href="#none" class="zc" style="font-size:13px;">立即网上注册</a></td>
+              <!-- <td height="24"><a href="#none" class="mm">忘记登录密码？</a></td> -->
+            <!--   <td align="right"><a href="#none" class="zc" style="font-size:13px;">立即网上注册</a></td> -->
             </tr>
           </table></td>
         </tr>
