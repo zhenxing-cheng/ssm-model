@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>  
-<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<%=request.getContextPath()%>/css/login.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">  
 window.onload=reloadVerifyCode;
 function reloadVerifyCode(){  

@@ -29,4 +29,7 @@ public interface IUserMapper {
     int updateByPrimaryKey(User record);
     
     User findUserByUserName(String name);
+    
+    List<User> userListForPage();
+
 }

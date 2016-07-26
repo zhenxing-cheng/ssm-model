@@ -47,7 +47,7 @@
 		</form> -->
 		<ul class="nav menu">
 			<c:choose>
-				<c:when test="${selectItem=='user'}">
+				<c:when test="${sessionScope.selectItem=='user'}">
 					<li class="active"><a href="index.html"><span
 							class="glyphicon glyphicon-dashboard"></span> 用户</a></li>
 				</c:when>
@@ -78,9 +78,6 @@
 					class="glyphicon glyphicon-user"></span> Login Page</a></li>
 		</ul>
 		<div class="attribution">
-			More Templates <a href="http://www.cssmoban.com/" target="_blank"
-				title="模板之家">模板之家</a> - Collect from <a
-				href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
 		</div>
 	</div>
 	<!--/.sidebar-->
@@ -89,5 +86,25 @@
 		<sitemesh:write property='body' />
 	</div>
 	<!--/.main-->
+	
+	<script>
+ 	$('#calendar').datepicker({}); 
+
+	!function($) {
+		$(document).on("click", "ul.nav li.parent > a > span.icon", function() {
+			$(this).find('em:first').toggleClass("glyphicon-minus");
+		});
+		$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+	}(window.jQuery);
+
+	$(window).on('resize', function() {
+		if ($(window).width() > 768)
+			$('#sidebar-collapse').collapse('show')
+	})
+	$(window).on('resize', function() {
+		if ($(window).width() <= 767)
+			$('#sidebar-collapse').collapse('hide')
+	})
+</script>
 </body>
 </html>

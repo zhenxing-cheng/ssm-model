@@ -201,4 +201,8 @@
 		left join t_permission tp on tp.role_id=tr.roleid
 	  where u.username=#{username}
  </select>
+ 
+ <select id="userListForPage" resultMap="BaseResultMap">  
+    select * from t_user 
+</select> 
 </mapper>

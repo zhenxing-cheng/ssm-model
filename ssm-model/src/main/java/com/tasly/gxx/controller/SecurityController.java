@@ -7,24 +7,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -43,7 +40,7 @@ public class SecurityController {
 	 * 用户登录
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request) {
+	public String login(HttpServletRequest request,HttpSession session) {
 		String resultPageURL = InternalResourceViewResolver.FORWARD_URL_PREFIX
 				+ "security";
 		String username = request.getParameter("username");
@@ -75,7 +72,8 @@ public class SecurityController {
 			System.out.println("对用户[" + username + "]进行登录验证..验证开始");
 			currentUser.login(token);
 			System.out.println("对用户[" + username + "]进行登录验证..验证通过");
-			request.setAttribute("selectItem", "user");
+//			request.setAttribute("selectItem", "user");
+			session.setAttribute("selectItem", "user");
 			resultPageURL = "user/userInfo";
 		} catch (UnknownAccountException uae) {
 			System.out.println("对用户[" + username + "]进行登录验证..验证未通过,未知账户");

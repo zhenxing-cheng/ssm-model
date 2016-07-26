@@ -1,10 +1,15 @@
 package com.tasly.gxx.dao.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.tasly.gxx.client.IUserMapper;
 import com.tasly.gxx.dao.IUserDao;
 import com.tasly.gxx.domain.User;
@@ -27,4 +32,8 @@ public class UserDaoImpl implements IUserDao {
 		return user;
 	}
 	
+	public List<User> findUserByCondition(PageBounds pageBounds){  
+	    Map<String, Object> params =new HashMap<String, Object>();  
+	    return sqlSession.selectList(IUserMapper.class.getName()+".userListForPage", params, pageBounds);  
+	}  
 }
