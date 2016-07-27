@@ -61,4 +61,6 @@
         <property name="maxInMemorySize" value="40960" />  
     </bean> 
 
+	<!-- 全局异常捕捉 -->
+	<bean class="com.tasly.gxx.exception.GlobalExceptionResolver" />
 </beans>
