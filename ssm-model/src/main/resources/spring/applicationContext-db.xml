@@ -149,4 +149,7 @@
 		<constructor-arg index="0"> <ref bean="redisTemplate"/> </constructor-arg> 
 		<property name="defaultExpiration" value="300"/> <property name="expires"> 
 		<map> <entry key="roles" value="1000" /> </map> </property> </bean> -->
+		
+	    <!-- swagger -->
+	<bean class="com.tasly.gxx.util.SwaggerConfig"/>
 </beans>

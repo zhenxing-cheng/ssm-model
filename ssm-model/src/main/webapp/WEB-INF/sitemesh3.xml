@@ -11,5 +11,6 @@
     <mapping path="/font-awesome/*" exclude="true" />
     <mapping path="/login" exclude="true" />
     <mapping path="/druid/*" exclude="true" />
-    <mapping path="/security" exclude="true" />
+    <mapping path="/security/*" exclude="true" />
+    <mapping path="/swagger/*" exclude="true" />
 </sitemesh>  

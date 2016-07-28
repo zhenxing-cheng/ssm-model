@@ -37,17 +37,12 @@ public class MyRealm extends AuthorizingRealm {
 				.getAvailablePrincipal(principals);
 		List<String> roleList = new ArrayList<String>();
 		List<String> permissionList = new ArrayList<String>();
-		// 从数据库中获取当前登录用户的详细信息
 		User user = this.userService.findUserByLoginName(currentUserName);
 		if (null != user) {
-			// 实体类User中包含有用户角色的实体类信息
 			if (!CollectionUtils.isEmpty(user.getRoleList())) {
-				// 获取当前登录用户的角色
 				for (Role role : user.getRoleList()) {
 					roleList.add(role.getRolename());
-					// 实体类Role中包含有角色权限的实体类信息
 					if (!CollectionUtils.isEmpty(role.getPermissionList())) {
-						// 获取权限
 						for (Permission pmss : role.getPermissionList()) {
 							if (!StringUtils.isEmpty(pmss.getPermissionname())) {
 								permissionList.add(pmss.getPermissionname());
@@ -59,7 +54,7 @@ public class MyRealm extends AuthorizingRealm {
 		} else {
 			throw new AuthorizationException();
 		}
-		// 为当前用户设置角色和权限
+
 		SimpleAuthorizationInfo simpleAuthorInfo = new SimpleAuthorizationInfo();
 		simpleAuthorInfo.addRoles(roleList);
 		simpleAuthorInfo.addStringPermissions(permissionList);
@@ -88,17 +83,13 @@ public class MyRealm extends AuthorizingRealm {
 		return authcInfo;
 	}
 
-	/**
-	 * 将一些数据放到ShiroSession中,以便于其它地方使用
-	 * 
-	 * @see 比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到
-	 */
+
 	private void setSession(Object key, Object value) {
 		Subject currentUser = SecurityUtils.getSubject();
 		if (null != currentUser) {
 			Session session = currentUser.getSession();
 			System.out
-					.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
+					.println("Session超时时间[" + session.getTimeout() + "]");
 			if (null != session) {
 				session.setAttribute(key, value);
 			}

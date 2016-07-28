@@ -45,13 +45,13 @@ public class UserServiceImpl implements IUserService {
 		PageList<User> pageList=null;
 		if(curPageSize!=0&&limit!=0){
 			String cache_key=RedisCache.CAHCENAME+"|getUserList|"+curPageSize+"|"+limit;
-			//先去缓存中取
+			
 			List<User> result_cache=cache.getListCache(cache_key, User.class);
 			if(result_cache==null){
-				//缓存中没有再去数据库取，并插入缓存（缓存时间为60秒）
-				String sortString = "userid.asc";//如果你想排序的话逗号分隔可以排序多列  
+
+				String sortString = "userid.asc";
 				PageBounds pageBounds = new PageBounds(curPageSize, limit , Order.formString(sortString));  
-				//获得结果集条总数  
+
 				pageList = (PageList<User>)this.userDaoImpl.findUserByCondition(pageBounds);  
 				System.out.println("totalCount: "+ pageList.getPaginator().getTotalCount());
 				cache.putListCacheWithExpireTime(cache_key, pageList, RedisCache.CAHCETIME);

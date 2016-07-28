@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * redis»º´æ
+ * redis cache
  * 
  * @author gaoxiexin
  *
@@ -22,8 +22,8 @@ import java.util.Set;
 public class RedisCache {
 	
 	
-	public final static String CAHCENAME="cache";//»º´æÃû
-	public final static int CAHCETIME=60;//Ä¬ÈÏ»º´æÊ±¼ä
+	public final static String CAHCENAME="cache";//ç¼“å­˜åç§°
+	public final static int CAHCETIME=60;//Ä¬ç¼“å­˜è¶…æ—¶
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
@@ -104,7 +104,7 @@ public class RedisCache {
 	}
 
 	/**
-	 * ¾«È·É¾³ıkey
+	 * ï¿½ï¿½È·É¾ï¿½ï¿½key
 	 * 
 	 * @param key
 	 */
@@ -113,7 +113,6 @@ public class RedisCache {
 	}
 
 	/**
-	 * Ä£ºıÉ¾³ıkey
 	 * 
 	 * @param pattern
 	 */
@@ -123,7 +122,7 @@ public class RedisCache {
 	}
 
 	/**
-	 * Çå¿ÕËùÓĞ»º´æ
+	 * 
 	 */
 	public void clearCache() {
 		deleteCacheWithPattern(RedisCache.CAHCENAME+"|*");

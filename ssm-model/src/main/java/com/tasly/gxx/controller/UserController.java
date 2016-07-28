@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.tasly.gxx.domain.User;
 import com.tasly.gxx.service.IUserService;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @Controller
 @RequestMapping("/user")
@@ -34,10 +35,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/getUserInfo")  
+	@ApiOperation(value="测试数据：获取用户列表", httpMethod ="POST", response=String.class, notes ="获取用户列表")  
     public String getUserInfo(HttpServletRequest request){  
 		User currentUser = (User) SecurityUtils.getSubject()
 				.getSession().getAttribute("currentUser");
-        System.out.println("��ǰ��¼���û�Ϊ[" + currentUser.toString() + "]");  
         request.setAttribute("currUser", currentUser.getUsername());  
         request.setAttribute("selectItem", "user");
         return "/user/userInfo";  

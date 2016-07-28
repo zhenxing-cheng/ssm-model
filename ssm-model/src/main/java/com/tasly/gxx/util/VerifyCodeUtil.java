@@ -6,57 +6,57 @@ import java.awt.image.BufferedImage;
 import java.util.Random;  
   
 /** 
- * ÑéÖ¤ÂëÉú³ÉÆ÷ 
+ * éªŒè¯ç ç”Ÿæˆå™¨ 
  * @see -------------------------------------------------------------------------------------------------------------- 
- * @see ¿ÉÉú³ÉÊı×Ö¡¢´óĞ´¡¢Ğ¡Ğ´×ÖÄ¸¼°ÈıÕß»ìºÏÀàĞÍµÄÑéÖ¤Âë 
- * @see Ö§³Ö×Ô¶¨ÒåÑéÖ¤Âë×Ö·ûÊıÁ¿,Ö§³Ö×Ô¶¨ÒåÑéÖ¤ÂëÍ¼Æ¬µÄ´óĞ¡,Ö§³Ö×Ô¶¨ÒåĞèÅÅ³ıµÄÌØÊâ×Ö·û,Ö§³Ö×Ô¶¨Òå¸ÉÈÅÏßµÄÊıÁ¿,Ö§³Ö×Ô¶¨ÒåÑéÖ¤ÂëÍ¼ÎÄÑÕÉ« 
+ * @see å¯ç”Ÿæˆæ•°å­—ã€å¤§å†™ã€å°å†™å­—æ¯åŠä¸‰è€…æ··åˆç±»å‹çš„éªŒè¯ç  
+ * @see æ”¯æŒè‡ªå®šä¹‰éªŒè¯ç å­—ç¬¦æ•°é‡,æ”¯æŒè‡ªå®šä¹‰éªŒè¯ç å›¾ç‰‡çš„å¤§å°,æ”¯æŒè‡ªå®šä¹‰éœ€æ’é™¤çš„ç‰¹æ®Šå­—ç¬¦,æ”¯æŒè‡ªå®šä¹‰å¹²æ‰°çº¿çš„æ•°é‡,æ”¯æŒè‡ªå®šä¹‰éªŒè¯ç å›¾æ–‡é¢œè‰² 
  * @see -------------------------------------------------------------------------------------------------------------- 
- * @see ÁíÍâ,¸øShiro¼ÓÈëÑéÖ¤ÂëÓĞ¶àÖÖ·½Ê½,Ò²¿ÉÒÔÍ¨¹ı¼Ì³ĞĞŞ¸ÄFormAuthenticationFilterÀà,Í¨¹ıShiroÈ¥ÑéÖ¤ÑéÖ¤Âë 
- * @see ¶øÕâÀï¼ÈÈ»Ê¹ÓÃÁËSpringMVC,Ò²ÎªÁË¼ò»¯²Ù×÷,¾ÍÊ¹ÓÃ´Ë¹¤¾ßÉú³ÉÑéÖ¤Âë,²¢ÔÚControllerÖĞ´¦ÀíÑéÖ¤ÂëµÄĞ£Ñé 
+ * @see å¦å¤–,ç»™ShiroåŠ å…¥éªŒè¯ç æœ‰å¤šç§æ–¹å¼,ä¹Ÿå¯ä»¥é€šè¿‡ç»§æ‰¿ä¿®æ”¹FormAuthenticationFilterç±»,é€šè¿‡Shiroå»éªŒè¯éªŒè¯ç  
+ * @see è€Œè¿™é‡Œæ—¢ç„¶ä½¿ç”¨äº†SpringMVC,ä¹Ÿä¸ºäº†ç®€åŒ–æ“ä½œ,å°±ä½¿ç”¨æ­¤å·¥å…·ç”ŸæˆéªŒè¯ç ,å¹¶åœ¨Controllerä¸­å¤„ç†éªŒè¯ç çš„æ ¡éªŒ 
  * @see -------------------------------------------------------------------------------------------------------------- 
  * @create Sep 29, 2013 4:23:13 PM 
- * @author ĞşÓñ<http://blog.csdn.net/jadyer> 
+ * @author ç„ç‰<http://blog.csdn.net/jadyer> 
  */  
 public class VerifyCodeUtil {  
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎª½öÊı×Ö,¼´0~9 
+     * éªŒè¯ç ç±»å‹ä¸ºä»…æ•°å­—,å³0~9 
      */  
     public static final int TYPE_NUM_ONLY = 0;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎª½ö×ÖÄ¸,¼´´óĞ¡Ğ´×ÖÄ¸»ìºÏ 
+     * éªŒè¯ç ç±»å‹ä¸ºä»…å­—æ¯,å³å¤§å°å†™å­—æ¯æ··åˆ 
      */  
     public static final int TYPE_LETTER_ONLY = 1;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎªÊı×ÖºÍ´óĞ¡Ğ´×ÖÄ¸»ìºÏ 
+     * éªŒè¯ç ç±»å‹ä¸ºæ•°å­—å’Œå¤§å°å†™å­—æ¯æ··åˆ 
      */  
     public static final int TYPE_ALL_MIXED = 2;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎªÊı×ÖºÍ´óĞ´×ÖÄ¸»ìºÏ 
+     * éªŒè¯ç ç±»å‹ä¸ºæ•°å­—å’Œå¤§å†™å­—æ¯æ··åˆ 
      */  
     public static final int TYPE_NUM_UPPER = 3;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎªÊı×ÖºÍĞ¡Ğ´×ÖÄ¸»ìºÏ 
+     * éªŒè¯ç ç±»å‹ä¸ºæ•°å­—å’Œå°å†™å­—æ¯æ··åˆ 
      */  
     public static final int TYPE_NUM_LOWER = 4;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎª½ö´óĞ´×ÖÄ¸ 
+     * éªŒè¯ç ç±»å‹ä¸ºä»…å¤§å†™å­—æ¯ 
      */  
     public static final int TYPE_UPPER_ONLY = 5;  
   
     /** 
-     * ÑéÖ¤ÂëÀàĞÍÎª½öĞ¡Ğ´×ÖÄ¸ 
+     * éªŒè¯ç ç±»å‹ä¸ºä»…å°å†™å­—æ¯ 
      */  
     public static final int TYPE_LOWER_ONLY = 6;  
   
     private VerifyCodeUtil(){}  
       
     /** 
-     * Éú³ÉËæ»úÑÕÉ« 
+     * ç”Ÿæˆéšæœºé¢œè‰² 
      */  
     private static Color generateRandomColor() {  
         Random random = new Random();  
@@ -65,18 +65,18 @@ public class VerifyCodeUtil {
       
       
     /** 
-     * Éú³ÉÍ¼Æ¬ÑéÖ¤Âë 
-     * @param type           ÑéÖ¤ÂëÀàĞÍ,²Î¼û±¾ÀàµÄ¾²Ì¬ÊôĞÔ 
-     * @param length         ÑéÖ¤Âë×Ö·û³¤¶È,ÒªÇó´óÓÚ0µÄÕûÊı 
-     * @param excludeString  ĞèÅÅ³ıµÄÌØÊâ×Ö·û 
-     * @param width          Í¼Æ¬¿í¶È(×¢Òâ´Ë¿í¶ÈÈô¹ıĞ¡,ÈİÒ×Ôì³ÉÑéÖ¤ÂëÎÄ±¾ÏÔÊ¾²»È«,Èç4¸ö×Ö·ûµÄÎÄ±¾¿ÉÊ¹ÓÃ85µ½90µÄ¿í¶È) 
-     * @param height         Í¼Æ¬¸ß¶È 
-     * @param interLine      Í¼Æ¬ÖĞ¸ÉÈÅÏßµÄÌõÊı 
-     * @param randomLocation Ã¿¸ö×Ö·ûµÄ¸ßµÍÎ»ÖÃÊÇ·ñËæ»ú 
-     * @param backColor      Í¼Æ¬ÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @param foreColor      ×ÖÌåÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @param lineColor      ¸ÉÈÅÏßÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @return Í¼Æ¬»º´æ¶ÔÏó 
+     * ç”Ÿæˆå›¾ç‰‡éªŒè¯ç  
+     * @param type           éªŒè¯ç ç±»å‹,å‚è§æœ¬ç±»çš„é™æ€å±æ€§ 
+     * @param length         éªŒè¯ç å­—ç¬¦é•¿åº¦,è¦æ±‚å¤§äº0çš„æ•´æ•° 
+     * @param excludeString  éœ€æ’é™¤çš„ç‰¹æ®Šå­—ç¬¦ 
+     * @param width          å›¾ç‰‡å®½åº¦(æ³¨æ„æ­¤å®½åº¦è‹¥è¿‡å°,å®¹æ˜“é€ æˆéªŒè¯ç æ–‡æœ¬æ˜¾ç¤ºä¸å…¨,å¦‚4ä¸ªå­—ç¬¦çš„æ–‡æœ¬å¯ä½¿ç”¨85åˆ°90çš„å®½åº¦) 
+     * @param height         å›¾ç‰‡é«˜åº¦ 
+     * @param interLine      å›¾ç‰‡ä¸­å¹²æ‰°çº¿çš„æ¡æ•° 
+     * @param randomLocation æ¯ä¸ªå­—ç¬¦çš„é«˜ä½ä½ç½®æ˜¯å¦éšæœº 
+     * @param backColor      å›¾ç‰‡é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @param foreColor      å­—ä½“é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @param lineColor      å¹²æ‰°çº¿é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @return å›¾ç‰‡ç¼“å­˜å¯¹è±¡ 
      */  
     public static BufferedImage generateImageCode(int type, int length, String excludeString, int width, int height, int interLine, boolean randomLocation, Color backColor, Color foreColor, Color lineColor){  
         String textCode = generateTextCode(type, length, excludeString);  
@@ -85,11 +85,11 @@ public class VerifyCodeUtil {
       
   
     /** 
-     * Éú³ÉÑéÖ¤Âë×Ö·û´® 
-     * @param type          ÑéÖ¤ÂëÀàĞÍ,²Î¼û±¾ÀàµÄ¾²Ì¬ÊôĞÔ 
-     * @param length        ÑéÖ¤Âë³¤¶È,ÒªÇó´óÓÚ0µÄÕûÊı 
-     * @param excludeString ĞèÅÅ³ıµÄÌØÊâ×Ö·û£¨ÎŞĞèÅÅ³ıÔòÎªnull£© 
-     * @return ÑéÖ¤Âë×Ö·û´® 
+     * ç”ŸæˆéªŒè¯ç å­—ç¬¦ä¸² 
+     * @param type          éªŒè¯ç ç±»å‹,å‚è§æœ¬ç±»çš„é™æ€å±æ€§ 
+     * @param length        éªŒè¯ç é•¿åº¦,è¦æ±‚å¤§äº0çš„æ•´æ•° 
+     * @param excludeString éœ€æ’é™¤çš„ç‰¹æ®Šå­—ç¬¦ï¼ˆæ— éœ€æ’é™¤åˆ™ä¸ºnullï¼‰ 
+     * @return éªŒè¯ç å­—ç¬¦ä¸² 
      */  
     public static String generateTextCode(int type, int length, String excludeString){  
         if(length <= 0){  
@@ -102,7 +102,7 @@ public class VerifyCodeUtil {
             case TYPE_NUM_ONLY:  
                 while(i < length){  
                     int t = random.nextInt(10);  
-                    //ÅÅ³ıÌØÊâ×Ö·û  
+                    //æ’é™¤ç‰¹æ®Šå­—ç¬¦  
                     if(null==excludeString || excludeString.indexOf(t+"")<0) {  
                         verifyCode.append(t);  
                         i++;  
@@ -168,26 +168,26 @@ public class VerifyCodeUtil {
     }  
   
     /** 
-     * ÒÑÓĞÑéÖ¤Âë,Éú³ÉÑéÖ¤ÂëÍ¼Æ¬ 
-     * @param textCode       ÎÄ±¾ÑéÖ¤Âë 
-     * @param width          Í¼Æ¬¿í¶È(×¢Òâ´Ë¿í¶ÈÈô¹ıĞ¡,ÈİÒ×Ôì³ÉÑéÖ¤ÂëÎÄ±¾ÏÔÊ¾²»È«,Èç4¸ö×Ö·ûµÄÎÄ±¾¿ÉÊ¹ÓÃ85µ½90µÄ¿í¶È) 
-     * @param height         Í¼Æ¬¸ß¶È 
-     * @param interLine      Í¼Æ¬ÖĞ¸ÉÈÅÏßµÄÌõÊı 
-     * @param randomLocation Ã¿¸ö×Ö·ûµÄ¸ßµÍÎ»ÖÃÊÇ·ñËæ»ú 
-     * @param backColor      Í¼Æ¬ÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @param foreColor      ×ÖÌåÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @param lineColor      ¸ÉÈÅÏßÑÕÉ«,ÈôÎªnullÔò±íÊ¾²ÉÓÃËæ»úÑÕÉ« 
-     * @return Í¼Æ¬»º´æ¶ÔÏó 
+     * å·²æœ‰éªŒè¯ç ,ç”ŸæˆéªŒè¯ç å›¾ç‰‡ 
+     * @param textCode       æ–‡æœ¬éªŒè¯ç  
+     * @param width          å›¾ç‰‡å®½åº¦(æ³¨æ„æ­¤å®½åº¦è‹¥è¿‡å°,å®¹æ˜“é€ æˆéªŒè¯ç æ–‡æœ¬æ˜¾ç¤ºä¸å…¨,å¦‚4ä¸ªå­—ç¬¦çš„æ–‡æœ¬å¯ä½¿ç”¨85åˆ°90çš„å®½åº¦) 
+     * @param height         å›¾ç‰‡é«˜åº¦ 
+     * @param interLine      å›¾ç‰‡ä¸­å¹²æ‰°çº¿çš„æ¡æ•° 
+     * @param randomLocation æ¯ä¸ªå­—ç¬¦çš„é«˜ä½ä½ç½®æ˜¯å¦éšæœº 
+     * @param backColor      å›¾ç‰‡é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @param foreColor      å­—ä½“é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @param lineColor      å¹²æ‰°çº¿é¢œè‰²,è‹¥ä¸ºnullåˆ™è¡¨ç¤ºé‡‡ç”¨éšæœºé¢œè‰² 
+     * @return å›¾ç‰‡ç¼“å­˜å¯¹è±¡ 
      */  
     public static BufferedImage generateImageCode(String textCode, int width, int height, int interLine, boolean randomLocation, Color backColor, Color foreColor, Color lineColor){  
-        //´´½¨ÄÚ´æÍ¼Ïñ  
+        //åˆ›å»ºå†…å­˜å›¾åƒ  
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);  
-        //»ñÈ¡Í¼ĞÎÉÏÏÂÎÄ  
+        //è·å–å›¾å½¢ä¸Šä¸‹æ–‡  
         Graphics graphics = bufferedImage.getGraphics();  
-        //»­±³¾°Í¼  
+        //ç”»èƒŒæ™¯å›¾  
         graphics.setColor(null==backColor ? generateRandomColor() : backColor);  
         graphics.fillRect(0, 0, width, height);  
-        //»­¸ÉÈÅÏß  
+        //ç”»å¹²æ‰°çº¿  
         Random random = new Random();  
         if(interLine > 0){  
             int x = 0, y = 0, x1 = width, y1 = 0;  
@@ -198,21 +198,21 @@ public class VerifyCodeUtil {
                 graphics.drawLine(x, y, x1, y1);  
             }  
         }  
-        //×ÖÌå´óĞ¡ÎªÍ¼Æ¬¸ß¶ÈµÄ80%  
+        //å­—ä½“å¤§å°ä¸ºå›¾ç‰‡é«˜åº¦çš„80%  
         int fsize = (int)(height * 0.8);  
         int fx = height - fsize;  
         int fy = fsize;  
-        //Éè¶¨×ÖÌå  
+        //è®¾å®šå­—ä½“  
         graphics.setFont(new Font("Default", Font.PLAIN, fsize));  
-        //Ğ´ÑéÖ¤Âë×Ö·û  
+        //å†™éªŒè¯ç å­—ç¬¦  
         for(int i=0; i<textCode.length(); i++){  
             fy = randomLocation ? (int)((Math.random()*0.3+0.6)*height) : fy;  
             graphics.setColor(null==foreColor ? generateRandomColor() : foreColor);  
-            //½«ÑéÖ¤Âë×Ö·ûÏÔÊ¾µ½Í¼ÏóÖĞ  
+            //å°†éªŒè¯ç å­—ç¬¦æ˜¾ç¤ºåˆ°å›¾è±¡ä¸­  
             graphics.drawString(textCode.charAt(i)+"", fx, fy);  
             fx += fsize * 0.9;  
         }  
         graphics.dispose();  
         return bufferedImage;  
     }  
-}
+}  

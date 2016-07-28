@@ -13,7 +13,6 @@
 			type : "get",
 			dataType : "json",
 			success : function(data) {
-				alert(data);
 				$('#table').bootstrapTable({
 					data : data,
 					striped : true, //表格显示条纹  

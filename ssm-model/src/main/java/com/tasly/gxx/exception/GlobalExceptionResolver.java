@@ -17,8 +17,8 @@ import com.alibaba.fastjson.JSON;
 import com.tasly.gxx.dto.BaseResult;
 
 /**
- * ´íÎóĞÅÏ¢Í³Ò»´¦Àí
- * ¶ÔÎ´´¦ÀíµÄ´íÎóĞÅÏ¢×öÒ»¸öÍ³Ò»´¦Àí
+ * é”™è¯¯ä¿¡æ¯ç»Ÿä¸€å¤„ç†
+ * å¯¹æœªå¤„ç†çš„é”™è¯¯ä¿¡æ¯åšä¸€ä¸ªç»Ÿä¸€å¤„ç†
  * @author gaoxiexin
  *
  */
@@ -29,13 +29,13 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 	
 	@ResponseBody
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-		LOG.error("ÓÃ»§ " + WebUtils.getSessionAttribute(request, "currentUser")+ " ·ÃÎÊ" + request.getRequestURI() + " ·¢Éú´íÎó, ´íÎóĞÅÏ¢:" + ex.getMessage());
-		//ÕâÀïÓĞ2ÖÖÑ¡Ôñ
-		//Ìø×ªµ½¶¨ÖÆ»¯µÄ´íÎóÒ³Ãæ
+		LOG.error("ç”¨æˆ· " + WebUtils.getCookie(request, "userPhone").getValue() + " è®¿é—®" + request.getRequestURI() + " å‘ç”Ÿé”™è¯¯, é”™è¯¯ä¿¡æ¯:" + ex.getMessage());
+		//è¿™é‡Œæœ‰2ç§é€‰æ‹©
+		//è·³è½¬åˆ°å®šåˆ¶åŒ–çš„é”™è¯¯é¡µé¢
 	    /*ModelAndView error = new ModelAndView("error");
 		error.addObject("exMsg", ex.getMessage());
 		error.addObject("exType", ex.getClass().getSimpleName().replace("\"", "'"));*/
-		//·µ»Øjson¸ñÊ½µÄ´íÎóĞÅÏ¢
+		//è¿”å›jsonæ ¼å¼çš„é”™è¯¯ä¿¡æ¯
 		try {
 			PrintWriter writer = response.getWriter();
 			BaseResult<String> result=new BaseResult(false, ex.getMessage());
@@ -45,6 +45,5 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 		}
 		return null;
 	}
-	
 
 }

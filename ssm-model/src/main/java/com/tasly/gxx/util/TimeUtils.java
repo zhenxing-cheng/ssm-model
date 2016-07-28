@@ -8,11 +8,11 @@ import java.util.Date;
  * 
  */
 public class TimeUtils {
-	private final static long minute = 60 * 1000;// 1·ÖÖÓ
-	private final static long hour = 60 * minute;// 1Ğ¡Ê±
-	private final static long day = 24 * hour;// 1Ìì
-	private final static long month = 31 * day;// ÔÂ
-	private final static long year = 12 * month;// Äê
+	private final static long minute = 60 * 1000;// 1åˆ†é’Ÿ
+	private final static long hour = 60 * minute;// 1å°æ—¶
+	private final static long day = 24 * hour;// 1å¤©
+	private final static long month = 31 * day;// æœˆ
+	private final static long year = 12 * month;// å¹´
 
 
 	public static final SimpleDateFormat DATE_FORMAT_DATE_D = new SimpleDateFormat("yyyy-MM-dd");
@@ -80,24 +80,24 @@ public class TimeUtils {
 		long r = 0;
 		if (diff > year) {
 			r = (diff / year);
-			return r + "ÄêÇ°";
+			return r + "å¹´å‰";
 		}
 		if (diff > month) {
 			r = (diff / month);
-			return r + "¸öÔÂÇ°";
+			return r + "ä¸ªæœˆå‰";
 		}
 		if (diff > day) {
 			r = (diff / day);
-			return r + "ÌìÇ°";
+			return r + "å¤©å‰";
 		}
 		if (diff > hour) {
 			r = (diff / hour);
-			return r + "Ğ¡Ê±Ç°";
+			return r + "å°æ—¶å‰";
 		}
 		if (diff > minute) {
 			r = (diff / minute);
-			return r + "·ÖÖÓÇ°";
+			return r + "åˆ†é’Ÿå‰";
 		}
-		return "¸Õ¸Õ";
+		return "åˆšåˆš";
 	}
 }

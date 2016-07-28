@@ -31,9 +31,9 @@
 	<context:component-scan base-package="com.tasly.gxx"/>	
 
 	<!-- Enable Annotation -->
-	<tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 	
-		<!-- 引入配置文件 -->
+	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">  
@@ -44,7 +44,7 @@
 	    </property>  
 		<property name="ignoreUnresolvablePlaceholders" value="true" /> 
 	</bean>
-
+ 	
 	<import resource="applicationContext-db.xml"/>
 	<import resource="applicationContext-shiro.xml"/>
 	<import resource="applicationContext-redis.xml"/>

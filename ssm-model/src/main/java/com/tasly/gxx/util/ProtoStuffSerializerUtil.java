@@ -9,16 +9,19 @@ import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.Schema;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
-
+/**
+ * åºåˆ—è¯å·¥å…·
+ */
 public class ProtoStuffSerializerUtil {
+
 	/**
-	 * ĞòÁĞ»¯¶ÔÏó
+	 * åºåˆ—åŒ–å¯¹è±¡
 	 * @param obj
 	 * @return
 	 */
 	public static <T> byte[] serialize(T obj) {
 		if (obj == null) {
-			throw new RuntimeException("ĞòÁĞ»¯¶ÔÏó(" + obj + ")!");
+			throw new RuntimeException("åºåˆ—åŒ–å¯¹è±¡(" + obj + ")!");
 		}
 		@SuppressWarnings("unchecked")
 		Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema(obj.getClass());
@@ -27,7 +30,7 @@ public class ProtoStuffSerializerUtil {
 		try {
 			protostuff = ProtostuffIOUtil.toByteArray(obj, schema, buffer);
 		} catch (Exception e) {
-			throw new RuntimeException("ĞòÁĞ»¯(" + obj.getClass() + ")¶ÔÏó(" + obj + ")·¢ÉúÒì³£!", e);
+			throw new RuntimeException("åºåˆ—åŒ–(" + obj.getClass() + ")å¯¹è±¡(" + obj + ")å‘ç”Ÿå¼‚å¸¸!", e);
 		} finally {
 			buffer.clear();
 		}
@@ -35,20 +38,20 @@ public class ProtoStuffSerializerUtil {
 	}
 
 	/**
-	 * ·´ĞòÁĞ»¯¶ÔÏó
+	 * ååºåˆ—åŒ–å¯¹è±¡
 	 * @param paramArrayOfByte
 	 * @param targetClass
 	 * @return
 	 */
 	public static <T> T deserialize(byte[] paramArrayOfByte, Class<T> targetClass) {
 		if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
-			throw new RuntimeException("·´ĞòÁĞ»¯¶ÔÏó·¢ÉúÒì³£,byteĞòÁĞÎª¿Õ!");
+			throw new RuntimeException("ååºåˆ—åŒ–å¯¹è±¡å‘ç”Ÿå¼‚å¸¸,byteåºåˆ—ä¸ºç©º!");
 		}
 		T instance = null;
 		try {
 			instance = targetClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			throw new RuntimeException("·´ĞòÁĞ»¯¹ı³ÌÖĞÒÀ¾İÀàĞÍ´´½¨¶ÔÏóÊ§°Ü!", e);
+			throw new RuntimeException("ååºåˆ—åŒ–è¿‡ç¨‹ä¸­ä¾æ®ç±»å‹åˆ›å»ºå¯¹è±¡å¤±è´¥!", e);
 		}
 		Schema<T> schema = RuntimeSchema.getSchema(targetClass);
 		ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
@@ -56,13 +59,13 @@ public class ProtoStuffSerializerUtil {
 	}
 
 	/**
-	 * ĞòÁĞ»¯ÁĞ±í
+	 * åºåˆ—åŒ–åˆ—è¡¨
 	 * @param objList
 	 * @return
 	 */
 	public static <T> byte[] serializeList(List<T> objList) {
 		if (objList == null || objList.isEmpty()) {
-			throw new RuntimeException("ĞòÁĞ»¯¶ÔÏóÁĞ±í(" + objList + ")²ÎÊıÒì³£!");
+			throw new RuntimeException("åºåˆ—åŒ–å¯¹è±¡åˆ—è¡¨(" + objList + ")å‚æ•°å¼‚å¸¸!");
 		}
 		@SuppressWarnings("unchecked")
 		Schema<T> schema = (Schema<T>) RuntimeSchema.getSchema(objList.get(0).getClass());
@@ -74,7 +77,7 @@ public class ProtoStuffSerializerUtil {
 			ProtostuffIOUtil.writeListTo(bos, objList, schema, buffer);
 			protostuff = bos.toByteArray();
 		} catch (Exception e) {
-			throw new RuntimeException("ĞòÁĞ»¯¶ÔÏóÁĞ±í(" + objList + ")·¢ÉúÒì³£!", e);
+			throw new RuntimeException("åºåˆ—åŒ–å¯¹è±¡åˆ—è¡¨(" + objList + ")å‘ç”Ÿå¼‚å¸¸!", e);
 		} finally {
 			buffer.clear();
 			try {
@@ -90,14 +93,14 @@ public class ProtoStuffSerializerUtil {
 	}
 
 	/**
-	 * ·´ĞòÁĞ»¯ÁĞ±í
+	 * ååºåˆ—åŒ–åˆ—è¡¨
 	 * @param paramArrayOfByte
 	 * @param targetClass
 	 * @return
 	 */
 	public static <T> List<T> deserializeList(byte[] paramArrayOfByte, Class<T> targetClass) {
 		if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
-			throw new RuntimeException("·´ĞòÁĞ»¯¶ÔÏó·¢ÉúÒì³£,byteĞòÁĞÎª¿Õ!");
+			throw new RuntimeException("ååºåˆ—åŒ–å¯¹è±¡å‘ç”Ÿå¼‚å¸¸,byteåºåˆ—ä¸ºç©º!");
 		}
 
 		Schema<T> schema = RuntimeSchema.getSchema(targetClass);
@@ -105,8 +108,9 @@ public class ProtoStuffSerializerUtil {
 		try {
 			result = ProtostuffIOUtil.parseListFrom(new ByteArrayInputStream(paramArrayOfByte), schema);
 		} catch (IOException e) {
-			throw new RuntimeException("·´ĞòÁĞ»¯¶ÔÏóÁĞ±í·¢ÉúÒì³£!", e);
+			throw new RuntimeException("ååºåˆ—åŒ–å¯¹è±¡åˆ—è¡¨å‘ç”Ÿå¼‚å¸¸!", e);
 		}
 		return result;
 	}
+
 }
