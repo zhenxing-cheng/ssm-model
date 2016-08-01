@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
@@ -16,6 +17,8 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.tasly.gxx.cache.RedisCache;
 import com.tasly.gxx.dao.IUserDao;
 import com.tasly.gxx.domain.User;
+import com.tasly.gxx.enums.ResultEnum;
+import com.tasly.gxx.exception.BizException;
 import com.tasly.gxx.service.IUserService;
 
 @Service("userService") 
@@ -40,7 +43,29 @@ public class UserServiceImpl implements IUserService {
 		}
 		return null;
 	}
-
+	
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
+	public boolean delUserByArray(String[] userIds){
+		boolean isDel=true;
+		try{
+			for(String userId:userIds){
+				boolean currentDelStatus=this.userDaoImpl.delUserById(userId);
+				if(currentDelStatus==false){
+					isDel=false;
+				}
+			}
+		}catch(BizException e){
+			LOG.error(ResultEnum.INNER_ERROR.getMsg()+":删除用户出错",e.getMessage());
+			isDel=false;
+		}finally{
+			if(isDel){
+				cache.deleteCacheWithPattern(RedisCache.CAHCENAME + "|getUserList|*");
+			}
+			return isDel;
+		}
+	}
+	
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public PageList<User> findUserForPage(int curPageSize, int limit) {
 		PageList<User> pageList=null;
 		if(curPageSize!=0&&limit!=0){

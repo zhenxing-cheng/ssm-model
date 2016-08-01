@@ -13,6 +13,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.tasly.gxx.client.IUserMapper;
 import com.tasly.gxx.dao.IUserDao;
 import com.tasly.gxx.domain.User;
+import com.tasly.gxx.exception.BizException;
 
 @Repository
 public class UserDaoImpl implements IUserDao {
@@ -36,4 +37,15 @@ public class UserDaoImpl implements IUserDao {
 	    Map<String, Object> params =new HashMap<String, Object>();  
 	    return sqlSession.selectList(IUserMapper.class.getName()+".userListForPage", params, pageBounds);  
 	}  
+	
+	public boolean delUserById(String userId) throws BizException{
+		IUserMapper userMapper = sqlSession.getMapper(IUserMapper.class);
+		int count=userMapper.deleteByPrimaryKey(Integer.parseInt(userId));
+		
+		if(count>0){
+			return true;
+		}
+		
+		return false;
+	}
 }

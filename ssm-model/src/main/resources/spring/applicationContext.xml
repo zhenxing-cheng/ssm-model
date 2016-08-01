@@ -48,4 +48,6 @@
 	<import resource="applicationContext-db.xml"/>
 	<import resource="applicationContext-shiro.xml"/>
 	<import resource="applicationContext-redis.xml"/>
+	<!-- Loads MongoDB configuraton -->  
+    <import resource="mongo-config.xml"/>
 </beans>

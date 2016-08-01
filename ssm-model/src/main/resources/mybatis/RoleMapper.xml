@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tasly.gxx.client.IRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.tasly.gxx.domain.Role" >
+  <resultMap id="BaseResultMap" type="Role" >
     <id column="roleid" property="roleId" jdbcType="INTEGER" />
     <result column="rolename" property="rolename" jdbcType="VARCHAR" />
   </resultMap>
@@ -97,11 +97,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tasly.gxx.domain.Role" >
+  <insert id="insert" parameterType="Role" >
     insert into t_role (roleid, rolename)
     values (#{id,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.tasly.gxx.domain.Role" >
+  <insert id="insertSelective" parameterType="Role" >
     insert into t_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,7 +148,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tasly.gxx.domain.Role" >
+  <update id="updateByPrimaryKeySelective" parameterType="Role" >
     update t_role
     <set >
       <if test="rolename != null" >
@@ -157,7 +157,7 @@
     </set>
     where roleid = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tasly.gxx.domain.Role" >
+  <update id="updateByPrimaryKey" parameterType="Role" >
     update t_role
     set rolename = #{rolename,jdbcType=VARCHAR}
     where roleid = #{id,jdbcType=INTEGER}

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tasly.gxx.client.IUserMapper" >
-  <resultMap id="BaseResultMap" type="com.tasly.gxx.domain.User" >
+  <resultMap id="BaseResultMap" type="User" >
     <id column="userid" property="userId" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <collection property="roleList" javaType="java.util.List" resultMap="roleResult"/>
   </resultMap>
   
-   <resultMap id="roleResult" type="com.tasly.gxx.domain.Role" >
+   <resultMap id="roleResult" type="Role" >
     <id column="roleid" property="roleId" jdbcType="INTEGER" />
     <result column="rolename" property="rolename" jdbcType="VARCHAR" />
     <collection property="permissionList" javaType="java.util.List" resultMap="permissionResule"/>
   </resultMap>
   
-  <resultMap id="permissionResule" type="com.tasly.gxx.domain.Permission" >
+  <resultMap id="permissionResule" type="Permission" >
     <id column="permissionid" property="permissionId" jdbcType="INTEGER" />
     <result column="permissionname" property="permissionname" jdbcType="VARCHAR" />
   </resultMap>
@@ -111,13 +111,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tasly.gxx.domain.User" >
+  <insert id="insert" parameterType="User" >
     insert into t_user (userid, username, password
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.tasly.gxx.domain.User" >
+  <insert id="insertSelective" parameterType="User" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -174,7 +174,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tasly.gxx.domain.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="User" >
     update t_user
     <set >
       <if test="username != null" >
@@ -186,7 +186,7 @@
     </set>
     where userid = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tasly.gxx.domain.User" >
+  <update id="updateByPrimaryKey" parameterType="User" >
     update t_user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR}

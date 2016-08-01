@@ -2,14 +2,20 @@ package com.tasly.gxx.domain;
 
 import java.util.List;
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "ç”¨æˆ·å®ä½“ç±»")
 public class User {
     private Integer userId;
-
+    
+    @ApiModelProperty(value = "ç”¨æˆ·å§“å", required = true)  
     private String username;
-
+    
+    @ApiModelProperty(value = "ç”¨æˆ·å¯†ç ", required = true)  
     private String password;
     
-    private List<Role> roleList;//Ò»¸öÓÃ»§¶à¸ö½ÇÉ«
+    private List<Role> roleList;
 
     public Integer getUserId() {
 		return userId;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tasly.gxx.client.IUserRoleRelationMapper" >
-  <resultMap id="BaseResultMap" type="com.tasly.gxx.domain.UserRoleRelationKey" >
+  <resultMap id="BaseResultMap" type="UserRoleRelationKey" >
     <id column="role_id" property="roleId" jdbcType="INTEGER" />
     <id column="user_id" property="userId" jdbcType="INTEGER" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     role_id, user_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tasly.gxx.domain.UserRoleRelationExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="UserRoleRelationKey" >
     select
     <if test="distinct" >
       distinct
@@ -81,7 +81,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.tasly.gxx.domain.UserRoleRelationKey" >
+  <delete id="deleteByPrimaryKey" parameterType="UserRoleRelationKey" >
     delete from t_user_role
     where role_id = #{roleId,jdbcType=INTEGER}
       and user_id = #{userId,jdbcType=INTEGER}
@@ -92,11 +92,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tasly.gxx.domain.UserRoleRelationKey" >
+  <insert id="insert" parameterType="UserRoleRelationKey" >
     insert into t_user_role (role_id, user_id)
     values (#{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.tasly.gxx.domain.UserRoleRelationKey" >
+  <insert id="insertSelective" parameterType="UserRoleRelationKey" >
     insert into t_user_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >

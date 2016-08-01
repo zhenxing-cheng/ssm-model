@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tasly.gxx.client.IPermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.tasly.gxx.domain.Permission" >
+  <resultMap id="BaseResultMap" type="Permission" >
     <id column="permissionid" property="permissionId" jdbcType="INTEGER" />
     <result column="permissionname" property="permissionname" jdbcType="VARCHAR" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
@@ -98,13 +98,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tasly.gxx.domain.Permission" >
+  <insert id="insert" parameterType="Permission" >
     insert into t_permission (permissionid, permissionname, role_id
       )
     values (#{id,jdbcType=INTEGER}, #{permissionname,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.tasly.gxx.domain.Permission" >
+  <insert id="insertSelective" parameterType="Permission" >
     insert into t_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -161,7 +161,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tasly.gxx.domain.Permission" >
+  <update id="updateByPrimaryKeySelective" parameterType="Permission" >
     update t_permission
     <set >
       <if test="permissionname != null" >
@@ -173,7 +173,7 @@
     </set>
     where permissionid = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tasly.gxx.domain.Permission" >
+  <update id="updateByPrimaryKey" parameterType="Permission" >
     update t_permission
     set permissionname = #{permissionname,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=INTEGER}

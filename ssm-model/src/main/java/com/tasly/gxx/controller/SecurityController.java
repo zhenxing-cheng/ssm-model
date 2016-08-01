@@ -37,7 +37,7 @@ public class SecurityController {
 	}
 
 	/**
-	 * ÓÃ»§µÇÂ¼
+	 * ç”¨æˆ·ç™»å½•
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request,HttpSession session) {
@@ -45,58 +45,58 @@ public class SecurityController {
 				+ "security";
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		// »ñÈ¡HttpSessionÖĞµÄÑéÖ¤Âë
+		// è·å–HttpSessionä¸­çš„éªŒè¯ç 
 		String verifyCode = (String) request.getSession().getAttribute(
 				"verifyCode");
-		// »ñÈ¡ÓÃ»§ÇëÇó±íµ¥ÖĞÊäÈëµÄÑéÖ¤Âë
+		// è·å–ç”¨æˆ·è¯·æ±‚è¡¨å•ä¸­è¾“å…¥çš„éªŒè¯ç 
 		String submitCode = WebUtils.getCleanParam(request, "verifyCode");
-		System.out.println("ÓÃ»§[" + username + "]µÇÂ¼Ê±ÊäÈëµÄÑéÖ¤ÂëÎª[" + submitCode
-				+ "],HttpSessionÖĞµÄÑéÖ¤ÂëÎª[" + verifyCode + "]");
+		System.out.println("ç”¨æˆ·[" + username + "]ç™»å½•æ—¶è¾“å…¥çš„éªŒè¯ç ä¸º[" + submitCode
+				+ "],HttpSessionä¸­çš„éªŒè¯ç ä¸º[" + verifyCode + "]");
 		if (StringUtils.isEmpty(submitCode)
 				|| !StringUtils.equals(verifyCode, submitCode.toLowerCase())) {
-			request.setAttribute("message_login", "ÑéÖ¤Âë²»ÕıÈ·");
+			request.setAttribute("message_login", "éªŒè¯ç ä¸æ­£ç¡®");
 			return resultPageURL;
 		}
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
 		token.setRememberMe(true);
-		System.out.println("ÎªÁËÑéÖ¤µÇÂ¼ÓÃ»§¶ø·â×°µÄtokenÎª"
+		System.out.println("ä¸ºäº†éªŒè¯ç™»å½•ç”¨æˆ·è€Œå°è£…çš„tokenä¸º"
 				+ ReflectionToStringBuilder.toString(token,
 						ToStringStyle.MULTI_LINE_STYLE));
-		// »ñÈ¡µ±Ç°µÄSubject
+		// è·å–å½“å‰çš„Subject
 		Subject currentUser = SecurityUtils.getSubject();
 		try {
-			// ÔÚµ÷ÓÃÁËlogin·½·¨ºó,SecurityManager»áÊÕµ½AuthenticationToken,²¢½«Æä·¢ËÍ¸øÒÑÅäÖÃµÄRealmÖ´ĞĞ±ØĞëµÄÈÏÖ¤¼ì²é
-			// Ã¿¸öRealm¶¼ÄÜÔÚ±ØÒªÊ±¶ÔÌá½»µÄAuthenticationTokens×÷³ö·´Ó¦
-			// ËùÒÔÕâÒ»²½ÔÚµ÷ÓÃlogin(token)·½·¨Ê±,Ëü»á×ßµ½MyRealm.doGetAuthenticationInfo()·½·¨ÖĞ,¾ßÌåÑéÖ¤·½Ê½Ïê¼û´Ë·½·¨
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤¿ªÊ¼");
+			// åœ¨è°ƒç”¨äº†loginæ–¹æ³•å,SecurityManagerä¼šæ”¶åˆ°AuthenticationToken,å¹¶å°†å…¶å‘é€ç»™å·²é…ç½®çš„Realmæ‰§è¡Œå¿…é¡»çš„è®¤è¯æ£€æŸ¥
+			// æ¯ä¸ªRealméƒ½èƒ½åœ¨å¿…è¦æ—¶å¯¹æäº¤çš„AuthenticationTokensä½œå‡ºååº”
+			// æ‰€ä»¥è¿™ä¸€æ­¥åœ¨è°ƒç”¨login(token)æ–¹æ³•æ—¶,å®ƒä¼šèµ°åˆ°MyRealm.doGetAuthenticationInfo()æ–¹æ³•ä¸­,å…·ä½“éªŒè¯æ–¹å¼è¯¦è§æ­¤æ–¹æ³•
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯å¼€å§‹");
 			currentUser.login(token);
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Í¨¹ı");
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯é€šè¿‡");
 //			request.setAttribute("selectItem", "user");
 			session.setAttribute("selectItem", "user");
-			resultPageURL = "user/userInfo";
+			resultPageURL = "user/userList";
 		} catch (UnknownAccountException uae) {
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Î´Í¨¹ı,Î´ÖªÕË»§");
-			request.setAttribute("message_login", "Î´ÖªÕË»§");
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯æœªé€šè¿‡,æœªçŸ¥è´¦æˆ·");
+			request.setAttribute("message_login", "æœªçŸ¥è´¦æˆ·");
 		} catch (IncorrectCredentialsException ice) {
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Î´Í¨¹ı,´íÎóµÄÆ¾Ö¤");
-			request.setAttribute("message_login", "ÃÜÂë²»ÕıÈ·");
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯æœªé€šè¿‡,é”™è¯¯çš„å‡­è¯");
+			request.setAttribute("message_login", "å¯†ç ä¸æ­£ç¡®");
 		} catch (LockedAccountException lae) {
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Î´Í¨¹ı,ÕË»§ÒÑËø¶¨");
-			request.setAttribute("message_login", "ÕË»§ÒÑËø¶¨");
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯æœªé€šè¿‡,è´¦æˆ·å·²é”å®š");
+			request.setAttribute("message_login", "è´¦æˆ·å·²é”å®š");
 		} catch (ExcessiveAttemptsException eae) {
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Î´Í¨¹ı,´íÎó´ÎÊı¹ı¶à");
-			request.setAttribute("message_login", "ÓÃ»§Ãû»òÃÜÂë´íÎó´ÎÊı¹ı¶à");
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯æœªé€šè¿‡,é”™è¯¯æ¬¡æ•°è¿‡å¤š");
+			request.setAttribute("message_login", "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯æ¬¡æ•°è¿‡å¤š");
 		} catch (AuthenticationException ae) {
-			// Í¨¹ı´¦ÀíShiroµÄÔËĞĞÊ±AuthenticationException¾Í¿ÉÒÔ¿ØÖÆÓÃ»§µÇÂ¼Ê§°Ü»òÃÜÂë´íÎóÊ±µÄÇé¾°
-			System.out.println("¶ÔÓÃ»§[" + username + "]½øĞĞµÇÂ¼ÑéÖ¤..ÑéÖ¤Î´Í¨¹ı,¶ÑÕ»¹ì¼£ÈçÏÂ");
+			// é€šè¿‡å¤„ç†Shiroçš„è¿è¡Œæ—¶AuthenticationExceptionå°±å¯ä»¥æ§åˆ¶ç”¨æˆ·ç™»å½•å¤±è´¥æˆ–å¯†ç é”™è¯¯æ—¶çš„æƒ…æ™¯
+			System.out.println("å¯¹ç”¨æˆ·[" + username + "]è¿›è¡Œç™»å½•éªŒè¯..éªŒè¯æœªé€šè¿‡,å †æ ˆè½¨è¿¹å¦‚ä¸‹");
 			ae.printStackTrace();
-			request.setAttribute("message_login", "ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·");
+			request.setAttribute("message_login", "ç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®");
 		}
-		// ÑéÖ¤ÊÇ·ñµÇÂ¼³É¹¦
+		// éªŒè¯æ˜¯å¦ç™»å½•æˆåŠŸ
 		if (currentUser.isAuthenticated()) {
-			System.out.println("ÓÃ»§[" + username
-					+ "]µÇÂ¼ÈÏÖ¤Í¨¹ı(ÕâÀï¿ÉÒÔ½øĞĞÒ»Ğ©ÈÏÖ¤Í¨¹ıºóµÄÒ»Ğ©ÏµÍ³²ÎÊı³õÊ¼»¯²Ù×÷)");
+			System.out.println("ç”¨æˆ·[" + username
+					+ "]ç™»å½•è®¤è¯é€šè¿‡(è¿™é‡Œå¯ä»¥è¿›è¡Œä¸€äº›è®¤è¯é€šè¿‡åçš„ä¸€äº›ç³»ç»Ÿå‚æ•°åˆå§‹åŒ–æ“ä½œ)");
 		} else {
 			token.clear();
 		}
@@ -104,7 +104,7 @@ public class SecurityController {
 	}
 
 	/**
-	 * ÓÃ»§µÇ³ö
+	 * ç”¨æˆ·ç™»å‡º
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -113,25 +113,25 @@ public class SecurityController {
 	}
 
 	/**
-	 * »ñÈ¡ÑéÖ¤ÂëÍ¼Æ¬ºÍÎÄ±¾(ÑéÖ¤ÂëÎÄ±¾»á±£´æÔÚHttpSessionÖĞ)
+	 * è·å–éªŒè¯ç å›¾ç‰‡å’Œæ–‡æœ¬(éªŒè¯ç æ–‡æœ¬ä¼šä¿å­˜åœ¨HttpSessionä¸­)
 	 */
 	@RequestMapping("/getVerifyCodeImage")
 	public void getVerifyCodeImage(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		// ÉèÖÃÒ³Ãæ²»»º´æ
+		// è®¾ç½®é¡µé¢ä¸ç¼“å­˜
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
 		String verifyCode = VerifyCodeUtil.generateTextCode(
 				VerifyCodeUtil.TYPE_NUM_ONLY, 4, null);
-		// ½«ÑéÖ¤Âë·Åµ½HttpSessionÀïÃæ
+		// å°†éªŒè¯ç æ”¾åˆ°HttpSessioné‡Œé¢
 		request.getSession().setAttribute("verifyCode", verifyCode);
-		System.out.println("±¾´ÎÉú³ÉµÄÑéÖ¤ÂëÎª[" + verifyCode + "],ÒÑ´æ·Åµ½HttpSessionÖĞ");
-		// ÉèÖÃÊä³öµÄÄÚÈİµÄÀàĞÍÎªJPEGÍ¼Ïñ
+		System.out.println("æœ¬æ¬¡ç”Ÿæˆçš„éªŒè¯ç ä¸º[" + verifyCode + "],å·²å­˜æ”¾åˆ°HttpSessionä¸­");
+		// è®¾ç½®è¾“å‡ºçš„å†…å®¹çš„ç±»å‹ä¸ºJPEGå›¾åƒ
 		response.setContentType("image/jpeg");
 		BufferedImage bufferedImage = VerifyCodeUtil.generateImageCode(
 				verifyCode, 90, 30, 3, true, Color.WHITE, Color.BLACK, null);
-		// Ğ´¸øä¯ÀÀÆ÷
+		// å†™ç»™æµè§ˆå™¨
 		ImageIO.write(bufferedImage, "JPEG", response.getOutputStream());
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.tasly.gxx.domain.User;
 import com.tasly.gxx.service.IUserService;
@@ -41,7 +41,7 @@ public class UserController {
 				.getSession().getAttribute("currentUser");
         request.setAttribute("currUser", currentUser.getUsername());  
         request.setAttribute("selectItem", "user");
-        return "/user/userInfo";  
+        return "/user/userList";  
     }
 	
 	@RequestMapping(value="/listUser",method = RequestMethod.GET)  
@@ -55,4 +55,16 @@ public class UserController {
 		}
         return null;  
     }
+	
+	@ResponseBody
+	@RequestMapping(value = "/delUser", method = RequestMethod.POST)
+	public boolean delUser(@RequestParam("userList") final String[] userList) {
+		boolean delResult=false;
+		if(ArrayUtils.isNotEmpty(userList)){
+			delResult=this.userService.delUserByArray(userList);
+		}
+		return delResult;
+	}
+	
+	
 }

@@ -10,4 +10,6 @@ public interface IUserService {
 	public User findUserByLoginName(String loginName);
 
 	public PageList<User> findUserForPage(int curPageSize, int limit);
+	
+	public boolean delUserByArray(String[] userIds);
 }

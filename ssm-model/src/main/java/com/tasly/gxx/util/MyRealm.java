@@ -89,7 +89,7 @@ public class MyRealm extends AuthorizingRealm {
 		if (null != currentUser) {
 			Session session = currentUser.getSession();
 			System.out
-					.println("Session³¬Ê±Ê±¼ä[" + session.getTimeout() + "]");
+					.println("Sessionè¶…æ—¶æ—¶é—´[" + session.getTimeout() + "]");
 			if (null != session) {
 				session.setAttribute(key, value);
 			}

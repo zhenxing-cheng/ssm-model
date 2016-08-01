@@ -21,4 +21,5 @@
 <script src="<%=request.getContextPath()%>/js/easypiechart-data.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap-datepicker.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap-table.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.bootbox.js"></script>
 
