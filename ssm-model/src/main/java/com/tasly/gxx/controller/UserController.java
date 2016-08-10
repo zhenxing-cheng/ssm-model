@@ -66,5 +66,10 @@ public class UserController {
 		return delResult;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public boolean addUser(@RequestParam("userName") final String userName,@RequestParam("userPass") final String userPass) {
+		boolean addResult=this.userService.addUser(userName,userPass);
+		return addResult;
+	}
 }

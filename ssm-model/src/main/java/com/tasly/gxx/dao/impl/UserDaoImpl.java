@@ -48,4 +48,16 @@ public class UserDaoImpl implements IUserDao {
 		
 		return false;
 	}
+
+	@Override
+	public boolean insertUser(String userName, String userPass) {
+		IUserMapper userMapper = sqlSession.getMapper(IUserMapper.class);
+		
+		User user= new User();
+		user.setUsername(userName);
+		user.setPassword(userPass);
+		
+		int count=userMapper.insert(user);
+		return count>0?true:false;
+	}
 }

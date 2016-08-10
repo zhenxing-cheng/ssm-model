@@ -18,4 +18,6 @@ public interface IUserDao {
 	public List<User> findUserByCondition(PageBounds pageBounds);
 	
 	public boolean delUserById(String userId) throws BizException;
+
+	public boolean insertUser(String userName, String userPass);
 }

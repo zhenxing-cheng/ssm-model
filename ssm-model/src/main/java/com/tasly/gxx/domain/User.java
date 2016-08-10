@@ -7,7 +7,7 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "用户实体类")
 public class User {
-    private Integer userId;
+    private Integer id;
     
     @ApiModelProperty(value = "用户姓名", required = true)  
     private String username;
@@ -17,12 +17,12 @@ public class User {
     
     private List<Role> roleList;
 
-    public Integer getUserId() {
-		return userId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

@@ -78,7 +78,7 @@ public class UserServiceImpl implements IUserService {
 				PageBounds pageBounds = new PageBounds(curPageSize, limit , Order.formString(sortString));  
 
 				pageList = (PageList<User>)this.userDaoImpl.findUserByCondition(pageBounds);  
-				System.out.println("totalCount: "+ pageList.getPaginator().getTotalCount());
+//				System.out.println("totalCount: "+ pageList.getPaginator().getTotalCount());
 				cache.putListCacheWithExpireTime(cache_key, pageList, RedisCache.CAHCETIME);
 				LOG.info("put cache with key:"+cache_key);
 			}else{
@@ -87,6 +87,24 @@ public class UserServiceImpl implements IUserService {
 			}
 		}
 		return pageList;
+	}
+
+	@Override
+	public boolean addUser(String userName, String userPass) {
+		boolean isAdd=false;
+		try{
+			if(StringUtils.isNotEmpty(userName)&&StringUtils.isNotEmpty(userPass)){
+				isAdd=this.userDaoImpl.insertUser(userName,userPass);
+			}
+		}catch(BizException e){
+			LOG.error(ResultEnum.INNER_ERROR.getMsg()+":新增用户出错",e.getMessage());
+			isAdd=false;
+		}finally{
+			if(isAdd){
+				cache.deleteCacheWithPattern(RedisCache.CAHCENAME + "|getUserList|*");
+			}
+			return isAdd;
+		}
 	}
 
 }

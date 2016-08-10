@@ -12,4 +12,6 @@ public interface IUserService {
 	public PageList<User> findUserForPage(int curPageSize, int limit);
 	
 	public boolean delUserByArray(String[] userIds);
+
+	public boolean addUser(String userName, String userPass);
 }
