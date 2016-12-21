@@ -23,7 +23,7 @@ public class RedisCache {
 	
 	
 	public final static String CAHCENAME="cache";//缓存名称
-	public final static int CAHCETIME=60;//Ĭ缓存超时
+	public final static int CAHCETIME=600;//Ĭ缓存超时
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
